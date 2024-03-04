@@ -7,9 +7,8 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  login(@Body() authPayload: AuthPayloadDTO) {
-    console.log(authPayload);
-    const token = this.authService.validateUser(authPayload);
+  async login(@Body() authPayload: AuthPayloadDTO) {
+    const token = await this.authService.validateUser(authPayload);
 
     if (!token) throw new HttpException('Invalid credentials', 401);
 

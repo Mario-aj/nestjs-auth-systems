@@ -2,9 +2,12 @@ import { Module } from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { JwtModule } from '@nestjs/jwt';
+import { PassportModule } from '@nestjs/passport';
+import { LocalStrategy } from './strategies/local.strategies';
 
 @Module({
   imports: [
+    PassportModule,
     JwtModule.register({
       secret: 'fjksdhfsj87569382urihfsjdkfgruiytweoighbskdfh23u',
       signOptions: {
@@ -13,6 +16,6 @@ import { JwtModule } from '@nestjs/jwt';
     }),
   ],
   controllers: [AuthController],
-  providers: [AuthService],
+  providers: [AuthService, LocalStrategy],
 })
 export class AuthModule {}

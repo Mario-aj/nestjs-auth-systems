@@ -11,7 +11,7 @@ const fakeUsers = [
 export class AuthService {
   constructor(private readonly jwt: JwtService) {}
   async validateUser({ password, username }: AuthPayloadDTO) {
-    const user = fakeUsers.find((user) => (user.username = username));
+    const user = fakeUsers.find((user) => user.username === username);
 
     if (!user || password !== user.password) {
       return null;
@@ -19,9 +19,7 @@ export class AuthService {
 
     delete user.password;
 
-    console.log(user);
-
-    const access_token = this.jwt.sign(user);
+    const access_token = await this.jwt.signAsync(user);
 
     return { access_token };
   }

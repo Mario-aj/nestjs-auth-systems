@@ -7,9 +7,8 @@ export class AuthPayloadDTO {
   })
   username: string;
 
-  @IsNotEmpty({ message: 'Campo obrigatório' })
-  @IsString()
-  @Length(8, 32, {
+  @IsString({ message: 'Campo obrigatório' })
+  @Length(2, 32, {
     message: 'A senha deve ter no minimo 8 e no máximo 32 caracteres',
   })
   password: string;
